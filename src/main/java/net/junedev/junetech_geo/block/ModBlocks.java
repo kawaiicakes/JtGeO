@@ -2617,7 +2617,7 @@ public class ModBlocks {
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.AMETHYST))); //MODEL
     public static final RegistryObject<Block> AENIGMATITE_BLOCK = registerBlock("aenigmatite_block",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.AMETHYST))); //MODEL
-    public static final RegistryObject<Block> AFGHANITE_BLOCK = registerBlock("afghanite_BLOCK",
+    public static final RegistryObject<Block> AFGHANITE_BLOCK = registerBlock("afghanite_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.AMETHYST)));
     public static final RegistryObject<Block> AGARDITE_BLOCK = registerBlock("agardite_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.AMETHYST)));
