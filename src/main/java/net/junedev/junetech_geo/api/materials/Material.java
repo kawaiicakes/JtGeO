@@ -16,13 +16,14 @@ public class Material implements StringRepresentable {
     private static String crystalHabit;
     private static int color;
     private static String luster;
+    private int rarity;
     @Nullable private static String customCondition;
 
     private Material(
             int materialID,
         String name, String formula,
         float harness, String crystalHabit,
-        int color, String luster,
+        int color, String luster, int rarity,
         String customConditions
 ) {
     this.materialID = materialID;
@@ -32,6 +33,7 @@ public class Material implements StringRepresentable {
     this.crystalHabit = crystalHabit;
     this.color = color;
     this.luster = luster;
+    this.rarity = rarity;
     this.customCondition = customCondition;
 }
     public static Builder create(String name) {
@@ -51,6 +53,7 @@ public class Material implements StringRepresentable {
         private static String crystalHabit;
         private static int color;
         private static String luster;
+        private int rarity;
         @Nullable private static String customCondition;
 
         private Builder(String name) {
@@ -86,6 +89,10 @@ public class Material implements StringRepresentable {
             this.luster = luster;
             return this;
         }
+        public Builder rarity(int rarity) {
+            this.rarity = rarity;
+            return this;
+        }
 
         public Builder customCondition(String customCondition) {
             this.customCondition = customCondition;
@@ -98,7 +105,7 @@ public class Material implements StringRepresentable {
                     this.materialID,
                     this.name, this.formula,
                     this.hardness, this.crystalHabit,
-                    this.color, this.luster,
+                    this.color, this.luster, this.rarity,
                     this.customCondition
             );
         }

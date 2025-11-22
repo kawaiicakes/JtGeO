@@ -13,6 +13,7 @@ public class Materials {
                 .crystalHabit("Quartz")
                 .color(1)
                 .luster("Vitreous")
+                .rarity(0)
                 .customCondition(null)
                 .build();
     }
