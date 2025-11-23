@@ -12,9 +12,10 @@ import net.minecraft.world.phys.Vec3;
  * <br><br>
  * Largely based on resources from <a href="https://adrianb.io/2014/08/09/perlinnoise.html">Adrian Biagioli</a>,
  * <a href="https://iquilezles.org/articles/morenoise/">Inigo Quilez</a>, and <a href="https://www.youtube.com/watch?v=gsJHzBTPG0Y">Josh's Channel</a>
+ * @author kawaiicakes
  */
 public class EnhancedPerlinNoise extends PerlinNoise {
-    protected EnhancedPerlinNoise(
+    public EnhancedPerlinNoise(
             RandomSource random, Pair<Integer, DoubleList> octavesAndAmplitudes, boolean useNewFactory
     ) {
         super(random, octavesAndAmplitudes, useNewFactory);
