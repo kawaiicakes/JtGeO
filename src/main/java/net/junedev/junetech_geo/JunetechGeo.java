@@ -22,6 +22,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.*;
 import org.slf4j.Logger;
 
+import static net.junedev.junetech_geo.worldgen.serialization.NoiseAlgorithm.NOISE_ALGORITHM;
+
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(JunetechGeo.MOD_ID)
 public class JunetechGeo {
@@ -29,8 +31,6 @@ public class JunetechGeo {
     //todo jtg or geo writes faster in-game as ID
     public static final String MOD_ID = "junetech_geo";
     public static final Logger LOGGER = LogUtils.getLogger();
-    public static final ResourceKey<Registry<NoiseAlgorithm>> NOISE_ALGORITHM
-            = ResourceKey.createRegistryKey(new ResourceLocation("worldgen/noise_algorithm"));
 
     public static ResourceLocation id(String path) {
         return new ResourceLocation(MOD_ID, path);
@@ -48,10 +48,6 @@ public class JunetechGeo {
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
-
-        final DeferredRegister<NoiseAlgorithm> algorithm = DeferredRegister.create(NOISE_ALGORITHM, MOD_ID);
-        algorithm.makeRegistry(RegistryBuilder::new);
-        algorithm.register(modEventBus);
 
         modEventBus.addListener(this::onDatapackRegistryEvent);
     }

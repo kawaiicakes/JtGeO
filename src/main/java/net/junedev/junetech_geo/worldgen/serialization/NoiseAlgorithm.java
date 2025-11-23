@@ -2,14 +2,16 @@ package net.junedev.junetech_geo.worldgen.serialization;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
-import static net.junedev.junetech_geo.JunetechGeo.NOISE_ALGORITHM;
-
 // FIXME - not serializing on datagen or server load
 public record NoiseAlgorithm(boolean useEnhanced) {
+    public static final ResourceKey<Registry<NoiseAlgorithm>> NOISE_ALGORITHM
+            = ResourceKey.createRegistryKey(new ResourceLocation("worldgen/noise_algorithm"));
+
     public static final Codec<NoiseAlgorithm> DIRECT_CODEC = RecordCodecBuilder.create(
             (builder) -> builder.group(
                     Codec.BOOL.fieldOf("useEnhanced").forGetter(NoiseAlgorithm::useEnhanced)

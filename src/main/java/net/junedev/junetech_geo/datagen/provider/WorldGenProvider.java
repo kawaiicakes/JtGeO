@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 import static net.junedev.junetech_geo.JunetechGeo.MOD_ID;
-import static net.junedev.junetech_geo.JunetechGeo.NOISE_ALGORITHM;
+import static net.junedev.junetech_geo.worldgen.serialization.NoiseAlgorithm.NOISE_ALGORITHM;
 
 public class WorldGenProvider extends DatapackBuiltinEntriesProvider {
 
