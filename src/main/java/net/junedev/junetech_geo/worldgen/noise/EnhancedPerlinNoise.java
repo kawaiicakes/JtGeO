@@ -44,7 +44,7 @@ public class EnhancedPerlinNoise extends PerlinNoise {
 
                 Vec3 asVec = new Vec3(partialDerivatives[0], partialDerivatives[1], partialDerivatives[2]);
 
-                // TODO: figure out wtf this.amplitudes is doing and why
+                // An additional amplitude multiplier is declared in the JSON for the noise
                 total += this.amplitudes.getDouble(i) * baseNoise * amplitude / (1.0D + asVec.dot(asVec));
             }
 

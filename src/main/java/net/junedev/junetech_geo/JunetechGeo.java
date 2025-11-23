@@ -4,9 +4,10 @@ import com.mojang.logging.LogUtils;
 import net.junedev.junetech_geo.block.ModBlocks;
 import net.junedev.junetech_geo.item.ModCreativeModeTabs;
 import net.junedev.junetech_geo.item.ModItems;
-import net.junedev.junetech_geo.worldgen.JTGConfiguredFeatures;
 import net.junedev.junetech_geo.worldgen.JTGFeatures;
-import net.junedev.junetech_geo.worldgen.chunk.JtGeOChunkStatus;
+import net.junedev.junetech_geo.worldgen.serialization.NoiseAlgorithm;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.*;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -27,6 +29,9 @@ public class JunetechGeo {
     //todo jtg or geo writes faster in-game as ID
     public static final String MOD_ID = "junetech_geo";
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static final ResourceKey<Registry<NoiseAlgorithm>> NOISE_ALGORITHM
+            = ResourceKey.createRegistryKey(new ResourceLocation("worldgen/noise_algorithm"));
+
     public static ResourceLocation id(String path) {
         return new ResourceLocation(MOD_ID, path);
     }
@@ -38,13 +43,22 @@ public class JunetechGeo {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
-        //JtGeOChunkStatus.register(modEventBus);
-        //Features
         JTGFeatures.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
+
+        final DeferredRegister<NoiseAlgorithm> algorithm = DeferredRegister.create(NOISE_ALGORITHM, MOD_ID);
+        algorithm.makeRegistry(RegistryBuilder::new);
+        algorithm.register(modEventBus);
+
+        modEventBus.addListener(this::onDatapackRegistryEvent);
+    }
+
+    @SubscribeEvent
+    public void onDatapackRegistryEvent(DataPackRegistryEvent.NewRegistry event) {
+        event.dataPackRegistry(NOISE_ALGORITHM, NoiseAlgorithm.DIRECT_CODEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
