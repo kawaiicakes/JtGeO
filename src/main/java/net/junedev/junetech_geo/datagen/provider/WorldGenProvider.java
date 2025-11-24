@@ -25,7 +25,6 @@ public class WorldGenProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.PLACED_FEATURE,             JTGPlacedFeatures::initialize)
             .add(ForgeRegistries.Keys.BIOME_MODIFIERS,  JTGBiomeModifiers::initialize)
             .add(NOISE_ALGORITHM,                       NoiseAlgorithm::bootstrap)
-
             ;
 
     public WorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {

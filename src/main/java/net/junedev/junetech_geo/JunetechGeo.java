@@ -5,9 +5,6 @@ import net.junedev.junetech_geo.block.ModBlocks;
 import net.junedev.junetech_geo.item.ModCreativeModeTabs;
 import net.junedev.junetech_geo.item.ModItems;
 import net.junedev.junetech_geo.worldgen.JTGFeatures;
-import net.junedev.junetech_geo.worldgen.serialization.NoiseAlgorithm;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,6 +19,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.*;
 import org.slf4j.Logger;
 
+import static net.junedev.junetech_geo.worldgen.serialization.NoiseAlgorithm.DIRECT_CODEC;
 import static net.junedev.junetech_geo.worldgen.serialization.NoiseAlgorithm.NOISE_ALGORITHM;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -39,6 +37,8 @@ public class JunetechGeo {
     public JunetechGeo() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        modEventBus.addListener(JunetechGeo::onDatapackRegistryEvent);
+
         ModCreativeModeTabs.register(modEventBus);
 
         ModItems.register(modEventBus);
@@ -48,13 +48,11 @@ public class JunetechGeo {
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
-
-        modEventBus.addListener(this::onDatapackRegistryEvent);
     }
 
     @SubscribeEvent
-    public void onDatapackRegistryEvent(DataPackRegistryEvent.NewRegistry event) {
-        event.dataPackRegistry(NOISE_ALGORITHM, NoiseAlgorithm.DIRECT_CODEC);
+    public static void onDatapackRegistryEvent(DataPackRegistryEvent.NewRegistry event) {
+        event.dataPackRegistry(NOISE_ALGORITHM, DIRECT_CODEC, DIRECT_CODEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

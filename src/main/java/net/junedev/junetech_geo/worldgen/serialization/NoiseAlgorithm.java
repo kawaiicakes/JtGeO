@@ -7,7 +7,8 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
-// FIXME - not serializing on datagen or server load
+import static net.junedev.junetech_geo.JunetechGeo.MOD_ID;
+
 public record NoiseAlgorithm(boolean useEnhanced) {
     public static final ResourceKey<Registry<NoiseAlgorithm>> NOISE_ALGORITHM
             = ResourceKey.createRegistryKey(new ResourceLocation("worldgen/noise_algorithm"));
@@ -85,6 +86,6 @@ public record NoiseAlgorithm(boolean useEnhanced) {
             BootstapContext<NoiseAlgorithm> context, String name, 
             boolean useEnhanced
     ) {
-        context.register(ResourceKey.create(NOISE_ALGORITHM, new ResourceLocation(name)), new NoiseAlgorithm(useEnhanced));
+        context.register(ResourceKey.create(NOISE_ALGORITHM, new ResourceLocation(MOD_ID, name)), new NoiseAlgorithm(useEnhanced));
     }
 }

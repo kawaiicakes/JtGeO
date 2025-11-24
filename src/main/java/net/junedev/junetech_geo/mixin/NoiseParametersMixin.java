@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Unique;
  */
 @Mixin(NormalNoise.NoiseParameters.class)
 public abstract class NoiseParametersMixin implements ExpandedNoiseParameters {
-    // TODO - add ability to serialize and deserialize the extra parameters
+    // TODO - reimplement using new worldgen/noise_algorithm
     @Unique
     public boolean jtGeO$useEnhanced = true;
 
